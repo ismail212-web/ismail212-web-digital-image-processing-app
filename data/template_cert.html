@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Sertifikat Kompetensi — DIP Lab</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+  body {{ background: #f0f4f8; font-family: 'Source Sans Pro', sans-serif; display:flex; justify-content:center; align-items:center; min-height:100vh; padding:20px; }}
+  .cert {{ background: white; width: 900px; padding: 60px 80px; border: 12px double #4a0e4e; box-shadow: 0 20px 60px rgba(0,0,0,.2); position: relative; }}
+  .cert::before {{ content:''; position:absolute; inset:20px; border:2px solid #b8860b; pointer-events:none; }}
+  .header {{ text-align:center; margin-bottom:30px; }}
+  .univ {{ font-size:13px; color:#555; letter-spacing:3px; text-transform:uppercase; margin-bottom:6px; }}
+  .title {{ font-family:'Playfair Display', serif; font-size:42px; color:#4a0e4e; line-height:1.1; }}
+  .subtitle {{ font-size:14px; color:#888; letter-spacing:2px; text-transform:uppercase; margin-top:6px; }}
+  .divider {{ width:120px; height:3px; background:linear-gradient(90deg,#4a0e4e,#b8860b); margin:20px auto; border-radius:2px; }}
+  .body {{ text-align:center; }}
+  .certify {{ font-size:15px; color:#666; margin:10px 0 5px; }}
+  .name {{ font-family:'Playfair Display', serif; font-size:38px; color:#002d62; margin:10px 0; border-bottom:2px solid #002d62; display:inline-block; padding-bottom:4px; }}
+  .nim {{ font-size:13px; color:#888; margin-bottom:20px; }}
+  .desc {{ font-size:15px; color:#555; line-height:1.8; max-width:600px; margin:0 auto 25px; }}
+  .score-box {{ display:inline-flex; gap:40px; background:#f8f4ff; border:1px solid #d8c0f0; border-radius:12px; padding:18px 40px; margin:20px auto; }}
+  .score-item {{ text-align:center; }}
+  .score-item .val {{ font-size:28px; font-weight:700; color:#4a0e4e; }}
+  .score-item .lbl {{ font-size:12px; color:#888; text-transform:uppercase; letter-spacing:1px; }}
+  .meta {{ display:flex; justify-content:space-between; margin-top:40px; font-size:13px; color:#777; }}
+  .cert-id {{ font-family:monospace; background:#f0f0f0; padding:4px 10px; border-radius:4px; color:#333; }}
+  .footer {{ text-align:center; margin-top:30px; font-size:11px; color:#aaa; letter-spacing:1px; }}
+  @media print {{ body{{background:white;}} .cert{{box-shadow:none;}} }}
+</style>
+</head>
+<body>
+<div class="cert">
+  <div class="header">
+    <div class="univ">Universitas Nusa Mandiri</div>
+    <div class="title">Sertifikat Kompetensi</div>
+    <div class="subtitle">Laboratorium Pengolahan Citra Digital</div>
+  </div>
+  <div class="divider"></div>
+  <div class="body">
+    <p class="certify">Dengan bangga menyatakan bahwa:</p>
+    <div class="name">{name}</div>
+    <p class="nim">dari {school}</p>
+    <p class="desc">
+      telah berhasil menyelesaikan seluruh modul praktikum dan lulus
+      <strong>Ujian Akhir Kompetensi Laboratorium Pengolahan Citra Digital</strong>
+      dengan hasil memuaskan.
+    </p>
+    <div class="score-box">
+      <div class="score-item">
+        <div class="val">{score:.1f}%</div>
+        <div class="lbl">Nilai Akhir</div>
+      </div>
+      <div class="score-item">
+        <div class="val">{correct}/{total}</div>
+        <div class="lbl">Jawaban Benar</div>
+      </div>
+    </div>
+  </div>
+  <div class="meta">
+    <span>Tanggal: <strong>{date}</strong></span>
+    <span>ID Sertifikat: <span class="cert-id">{cert_id}</span></span>
+  </div>
+  <div class="footer">Universitas Nusa Mandiri &mdash; Digital Image Processing Lab &mdash; {cert_id}</div>
+</div>
+<div style="text-align:center;margin-top:20px;">
+  <button onclick="window.print()" style="background:#4a0e4e;color:white;padding:12px 30px;border:none;border-radius:8px;cursor:pointer;font-size:16px;">🖨️ Cetak / Simpan PDF</button>
+</div>
+</body>
+</html>
