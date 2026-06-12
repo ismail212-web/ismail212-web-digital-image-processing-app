@@ -61,6 +61,7 @@ def generate_certificate_html(name, school, score, correct, total, cert_id, date
     return "<h3 style='color:red;'>⚠ template_cert.html tidak ditemukan!</h3>"
 
 
+# Definisikan soal-soal di sini
 QUIZ_QUESTIONS = [
     {
         "id": 1,
@@ -463,31 +464,89 @@ def show_quiz_page():
     total = len(QUIZ_QUESTIONS)
     idx = st.session_state.current_question_idx
     q = QUIZ_QUESTIONS[idx]
+
+    # Judul materi dan progress
     st.subheader(q["materi"])
     st.progress((idx + 1) / total, text=f"Soal {idx+1}/{total}")
     st.markdown(f"**{q['pertanyaan']}**")
+
+    # Buat key unik untuk radio button berdasarkan ID soal
+    radio_key = f"radio_q_{q['id']}"
+
+    # Opsi jawaban
     opts = [f"{k}. {v}" for k, v in q["opsi"].items()]
-    prev = st.session_state.quiz_answers.get(q["id"])
-    idx_def = list(q["opsi"]).index(prev) if prev else None
-    pil = st.radio("Pilih:", opts, index=idx_def, key=f"r{q['id']}")
+
+    # Cek jawaban yang sudah disimpan sebelumnya (jika ada)
+    jawaban_disimpan = st.session_state.quiz_answers.get(q["id"])
+    idx_default = -1
+    if jawaban_disimpan:
+        # Cari indeks opsi yang sesuai dengan jawaban yang disimpan
+        opsi_yang_disimpan = f"{jawaban_disimpan}. {q['opsi'][jawaban_disimpan]}"
+        try:
+            idx_default = opts.index(opsi_yang_disimpan)
+        except ValueError:
+            idx_default = -1  # Jika opsi tidak ditemukan (seharusnya tidak terjadi)
+
+    # Tampilkan radio button
+    pil = st.radio(
+        "Pilih jawaban Anda:",  # Label opsional
+        options=opts,
+        index=(
+            idx_default if idx_default >= 0 else None
+        ),  # Gunakan None jika tidak ada jawaban sebelumnya
+        key=radio_key,  # Gunakan key unik
+        # Optional: Hapus label jika ingin lebih ringkas
+        # label_visibility="collapsed"
+    )
+
+    # Simpan jawaban ke session state jika user memilih
     if pil:
-        st.session_state.quiz_answers[q["id"]] = pil[0]
-    sudah = q["id"] in st.session_state.quiz_answers
-    if not sudah:
-        st.warning("Pilih jawaban dulu")
-    c1, c2, c3 = st.columns([1, 1, 2])
-    with c1:
-        if st.button("⬅ Back", disabled=idx == 0):
-            st.session_state.current_question_idx -= 1
-            st.rerun()
-    with c2:
+        # Ekstrak kunci jawaban dari string yang dipilih (misal "A. Option Text" -> "A")
+        kunci_jawaban = pil.split(". ")[0]
+        st.session_state.quiz_answers[q["id"]] = kunci_jawaban
+
+    # Cek apakah jawaban sudah dipilih
+    sudah_memilih = q["id"] in st.session_state.quiz_answers
+
+    if not sudah_memilih:
+        st.warning("Pilih jawaban terlebih dahulu.")
+
+    # Kolom untuk tombol navigasi
+    col_back, col_next, _ = st.columns(
+        [1, 1, 2]
+    )  # Kolom ketiga hanya untuk mengisi ruang
+
+    with col_back:
+        # Tombol Back
+        if st.button("⬅ Back", disabled=(idx == 0), use_container_width=True):
+            # Pastikan indeks tidak negatif
+            if st.session_state.current_question_idx > 0:
+                st.session_state.current_question_idx -= 1
+            st.rerun()  # Refresh halaman untuk menampilkan soal sebelumnya
+
+    with col_next:
+        # Tombol Next atau Submit
         if idx < total - 1:
-            if st.button("Next ➡", type="primary", disabled=not sudah):
-                st.session_state.current_question_idx += 1
+            # Masih ada soal berikutnya
+            if st.button(
+                "Next ➡",
+                type="primary",
+                disabled=not sudah_memilih,
+                use_container_width=True,
+            ):
+                # Pastikan indeks tidak melebihi jumlah soal
+                if st.session_state.current_question_idx < total - 1:
+                    st.session_state.current_question_idx += 1
                 st.rerun()
         else:
-            all_done = len(st.session_state.quiz_answers) == total
-            if st.button("🔒 Submit", type="primary", disabled=not all_done):
+            # Ini adalah soal terakhir
+            all_answered = len(st.session_state.quiz_answers) == total
+            if st.button(
+                "🔒 Submit",
+                type="primary",
+                disabled=not all_answered,
+                use_container_width=True,
+            ):
                 st.session_state.quiz_phase = "result"
                 st.rerun()
 
@@ -499,15 +558,24 @@ def show_result_page():
         for q in QUIZ_QUESTIONS
         if st.session_state.quiz_answers.get(q["id"]) == q["jawaban_benar"]
     )
-    skor = benar / total * 100
+    skor = (benar / total) * 100
     lulus = skor >= 75
+
     st.title("📊 Hasil")
     c1, c2 = st.columns(2)
-    c1.metric("Skor", f"{skor:.1f}%", "LULUS" if lulus else "GAGAL")
+    status_kelulusan = "LULUS" if lulus else "GAGAL"
+    warna_status = "green" if lulus else "red"
+    c1.metric("Skor", f"{skor:.1f}%", value_color=warna_status)
+    c1.caption(status_kelulusan)
     c2.metric("Benar", f"{benar}/{total}")
+
     if lulus:
-        st.success(f"Selamat {st.session_state.participant_name}!")
+        st.success(
+            f"🎉 Selamat {st.session_state.participant_name}! Anda lulus dengan skor {skor:.1f}%."
+        )
+        # Cek apakah sertifikat sudah dibuat sebelumnya untuk sesi ini
         if not st.session_state.cert_id:
+            # Buat entri baru di database
             cid, cd = add_participant(
                 st.session_state.participant_name,
                 st.session_state.participant_school,
@@ -515,8 +583,10 @@ def show_result_page():
                 benar,
                 total,
             )
+            # Simpan ID dan tanggal ke session state untuk tampilan ini
             st.session_state.cert_id = cid
             st.session_state.cert_date = cd
+        # Generate HTML sertifikat
         html = generate_certificate_html(
             st.session_state.participant_name,
             st.session_state.participant_school,
@@ -526,20 +596,38 @@ def show_result_page():
             st.session_state.cert_id,
             st.session_state.cert_date,
         )
-        st.components.v1.html(html, height=800, scrolling=True)
+        # Tampilkan sertifikat
+        # Tinggi iframe bisa disesuaikan, misalnya 1200
+        st.components.v1.html(html, height=1200, scrolling=False)
+
     else:
-        st.error("Belum lulus, ulangi")
+        st.error(
+            f"❌ Maaf {st.session_state.participant_name}, Anda belum lulus. Skor Anda {skor:.1f}% (< 75%)."
+        )
+
     st.markdown("---")
     st.markdown("### Pembahasan")
+
     for q in QUIZ_QUESTIONS:
         ans = st.session_state.quiz_answers.get(q["id"], "-")
         ok = ans == q["jawaban_benar"]
-        with st.expander(f"Soal {q['id']}: {'🟢' if ok else '❌'}"):
-            st.write(q["pertanyaan"])
-            st.write(f"Jawaban Anda: {ans}")
-            st.write(f"Benar: {q['jawaban_benar']}")
-            st.info(q["pembahasan"])
-    if st.button("🔄 Ulangi"):
+        emoji = "🟢" if ok else "❌"
+        with st.expander(f"Soal {q['id']}: {emoji}"):
+            st.write("**Pertanyaan:**", q["pertanyaan"])
+            st.write(f"**Jawaban Anda:** {ans}")
+            st.write(f"**Jawaban Benar:** {q['jawaban_benar']}")
+            st.info(f"**Pembahasan:** {q['pembahasan']}")
+
+    if st.button("🔄 Ulangi Kuis", use_container_width=True):
+        # Reset semua state terkait kuis
         st.session_state.quiz_phase = "registration"
         st.session_state.quiz_answers = {}
+        st.session_state.current_question_idx = 0
+        st.session_state.cert_id = ""
+        st.session_state.cert_date = ""
         st.rerun()
+
+
+# Jika file ini dijalankan langsung (bukan diimpor), panggil fungsi run
+# if __name__ == "__main__":
+#     run()
