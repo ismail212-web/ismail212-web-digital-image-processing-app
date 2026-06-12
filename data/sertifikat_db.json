@@ -1,1 +1,32 @@
-{"peserta": [], "total_sertifikat": 0}
+{
+  "peserta": [
+    {
+      "nama": "Ismail Pamudji",
+      "sekolah": "Universitas Nusa Mandiri",
+      "nilai": 77.5,
+      "benar": 31,
+      "total": 40,
+      "tanggal": "12 June 2026, 17:23:10",
+      "id_sertifikat": "SERT-0001"
+    },
+    {
+      "nama": "Ismail Pamudji",
+      "sekolah": "Universitas Nusa Mandiri",
+      "nilai": 100.0,
+      "benar": 40,
+      "total": 40,
+      "tanggal": "12 June 2026, 18:00:25",
+      "id_sertifikat": "SERT-0002"
+    },
+    {
+      "nama": "Ismail Pamudji",
+      "sekolah": "Universitas Nusa Mandiri",
+      "nilai": 100.0,
+      "benar": 40,
+      "total": 40,
+      "tanggal": "12 June 2026, 18:09:54",
+      "id_sertifikat": "SERT-0003"
+    }
+  ],
+  "total_sertifikat": 3
+}
