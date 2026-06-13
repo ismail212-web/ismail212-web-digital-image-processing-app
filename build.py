@@ -29,35 +29,57 @@ def build_app():
     """Build aplikasi desktop menggunakan PyInstaller."""
     print("�� Memulai build aplikasi desktop...")
     
-    # Perintah PyInstaller
+    # Module yang TIDAK dibutuhkan (exclude untuk mempercepat build)
+    excludes = [
+        "tensorflow", "torch", "keras", "theano",
+        "scipy", "pandas", "seaborn", "plotly",
+        "sklearn", "scikit-learn", "xgboost", "lightgbm",
+        "notebook", "jupyter", "ipython", "IPython",
+        "sphinx", "pytest", "setuptools", "pip",
+        "matplotlib.backends.backend_qt5agg",
+        "matplotlib.backends.backend_qt4agg",
+        "matplotlib.backends.backend_gtk3agg",
+        "matplotlib.backends.backend_tkagg",
+    ]
+    
     cmd = [
         sys.executable, "-m", "PyInstaller",
         "--name", "DIPLab",
-        "--windowed",  # Tanpa console window
-        "--noconfirm",  # Timpa build sebelumnya
-        "--clean",  # Bersihkan cache
-        "--add-data", "app:app",  # Sertakan folder app/
-        "--add-data", "src:src",  # Sertakan folder src/
-        "--add-data", "modules:modules",  # Sertakan folder modules/
-        "--add-data", "utils:utils",  # Sertakan folder utils/
-        "--add-data", "data:data",  # Sertakan folder data/
-        "--add-data", "assets:assets",  # Sertakan folder assets/
-        "--add-data", "config.json:.",  # Sertakan config.json
+        "--windowed",
+        "--noconfirm",
+        "--clean",
+        "--log-level", "WARN",
+        "--add-data", "app:app",
+        "--add-data", "src:src",
+        "--add-data", "modules:modules",
+        "--add-data", "utils:utils",
+        "--add-data", "data:data",
+        "--add-data", "assets:assets",
+        "--add-data", "config.json:.",
         "--hidden-import", "webview",
         "--hidden-import", "cv2",
         "--hidden-import", "numpy",
         "--hidden-import", "PIL",
         "--hidden-import", "reportlab",
-        "main.py"
+        "--hidden-import", "streamlit",
+        "--collect-all", "streamlit",
     ]
     
-    print("   Menjalankan PyInstaller...")
+    # Tambahkan exclude modules
+    for module in excludes:
+        cmd.extend(["--exclude-module", module])
+    
+    cmd.append("main.py")
+    
+    print("   Menjalankan PyInstaller (dengan exclude module)...")
+    print(f"   Mengexclude: {len(excludes)} module yang tidak dipakai")
     result = subprocess.run(cmd)
     
     if result.returncode == 0:
         print("\n✅ BUILD BERHASIL!")
         if sys.platform == "darwin":
             print(f"   📦 Aplikasi macOS: dist/DIPLab.app")
+            print(f"   🚀 Jalankan dengan: open dist/DIPLab.app")
         elif sys.platform == "win32":
             print(f"   📦 Aplikasi Windows: dist/DIPLab.exe")
         else:
