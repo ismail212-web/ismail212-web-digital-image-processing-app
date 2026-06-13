@@ -45,7 +45,7 @@ def run():
             st.image(
                 str(soal1),
                 caption="Original → DFT → FFT Shift",
-                use_container_width=True,
+                width="stretch",
             )
 
         else:
@@ -59,7 +59,7 @@ def run():
             st.image(
                 str(soal2),
                 caption="Set F(0,0)=0",
-                use_container_width=True,
+                width="stretch",
             )
 
         else:
@@ -191,7 +191,7 @@ Std : {np.std(img_gray):.2f}
         st.image(
             img_gray,
             caption="Original Image",
-            use_container_width=True,
+            width="stretch",
         )
 
     with c2:
@@ -199,7 +199,7 @@ Std : {np.std(img_gray):.2f}
         st.image(
             dft_view,
             caption="2D DFT",
-            use_container_width=True,
+            width="stretch",
         )
 
     with c3:
@@ -207,7 +207,7 @@ Std : {np.std(img_gray):.2f}
         st.image(
             shift_view,
             caption="2D FFT Shift",
-            use_container_width=True,
+            width="stretch",
         )
 
     # =====================================================
@@ -348,7 +348,7 @@ Std : {np.std(img_gray):.2f}
         st.image(
             img_gray,
             caption="Original",
-            use_container_width=True,
+            width="stretch",
         )
 
     with c2:
@@ -356,7 +356,7 @@ Std : {np.std(img_gray):.2f}
         st.image(
             dc_view,
             caption="Set F(0,0)=0",
-            use_container_width=True,
+            width="stretch",
         )
 
     with c3:
@@ -364,7 +364,7 @@ Std : {np.std(img_gray):.2f}
         st.image(
             img_back,
             caption="Result",
-            use_container_width=True,
+            width="stretch",
         )
 
     # =====================================================

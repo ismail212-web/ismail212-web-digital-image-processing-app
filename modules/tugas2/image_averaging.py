@@ -13,7 +13,7 @@ def run():
 
     # --- Tampilkan materi buku ---
     if fig_path.exists():
-        st.image(str(fig_path), use_container_width=True)
+        st.image(str(fig_path), width="stretch")
 
     with st.expander("📘 Penjelasan Proses & Kegunaan", expanded=True):
         st.markdown("""

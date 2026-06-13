@@ -22,13 +22,13 @@ def run():
         st.image(
             "assets/soal1_grayscale_ramp.jpg",
             caption="Contoh: Grayscale ramp (10 level keabuan)",
-            use_container_width=True,
+            width="stretch",
         )
     with col_ex2:
         st.image(
             "assets/soal1_mach_band.jpg",
             caption="Gambar 2 di pojok kanan gambar 1",
-            use_container_width=True,
+            width="stretch",
         )
 
     st.info(

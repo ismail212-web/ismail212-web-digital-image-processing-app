@@ -72,7 +72,7 @@ def run():
     if num_match > 0:
         match_img = cv2.drawMatches(img_a, match_result["kp1"], img_b, match_result["kp2"], good_matches[:50], None, flags=2)
         match_img_rgb = cv2.cvtColor(match_img, cv2.COLOR_BGR2RGB)
-        st.image(match_img_rgb, caption=f"Good Matches: {num_match} titik", use_container_width=True)
+        st.image(match_img_rgb, caption=f"Good Matches: {num_match} titik", width="stretch")
     else:
         st.warning("⚠️ Tidak ada kecocokan fitur yang ditemukan.")
 

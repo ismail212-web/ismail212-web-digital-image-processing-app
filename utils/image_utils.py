@@ -16,6 +16,6 @@ def show_image_centered(image, caption: str = "", width: int = None):
         if width:
             st.image(image, caption=caption, width=width)
         else:
-            st.image(image, caption=caption, use_container_width=False)
+            st.image(image, caption=caption, width="content")
 
     st.markdown("</div>", unsafe_allow_html=True)

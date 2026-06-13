@@ -444,7 +444,7 @@ def show_registration_page():
         name = st.text_input("👤 Nama Lengkap")
         school = st.text_input("🏫 Institusi")
         st.markdown(f"**Syarat:** Nilai minimal **75%** dari total {total} soal")
-        if st.form_submit_button("🚀 Mulai", type="primary", use_container_width=True):
+        if st.form_submit_button("🚀 Mulai", type="primary", width="stretch"):
             if name and school:
                 st.session_state.update(
                     {
@@ -518,7 +518,7 @@ def show_quiz_page():
 
     with col_back:
         # Tombol Back
-        if st.button("⬅ Back", disabled=(idx == 0), use_container_width=True):
+        if st.button("⬅ Back", disabled=(idx == 0), width="stretch"):
             # Pastikan indeks tidak negatif
             if st.session_state.current_question_idx > 0:
                 st.session_state.current_question_idx -= 1
@@ -532,7 +532,7 @@ def show_quiz_page():
                 "Next ➡",
                 type="primary",
                 disabled=not sudah_memilih,
-                use_container_width=True,
+                width="stretch",
             ):
                 # Pastikan indeks tidak melebihi jumlah soal
                 if st.session_state.current_question_idx < total - 1:
@@ -545,7 +545,7 @@ def show_quiz_page():
                 "🔒 Submit",
                 type="primary",
                 disabled=not all_answered,
-                use_container_width=True,
+                width="stretch",
             ):
                 st.session_state.quiz_phase = "result"
                 st.rerun()
@@ -618,7 +618,7 @@ def show_result_page():
             st.write(f"**Jawaban Benar:** {q['jawaban_benar']}")
             st.info(f"**Pembahasan:** {q['pembahasan']}")
 
-    if st.button("🔄 Ulangi Kuis", use_container_width=True):
+    if st.button("🔄 Ulangi Kuis", width="stretch"):
         # Reset semua state terkait kuis
         st.session_state.quiz_phase = "registration"
         st.session_state.quiz_answers = {}

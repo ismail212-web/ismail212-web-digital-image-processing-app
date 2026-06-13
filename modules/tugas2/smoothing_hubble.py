@@ -24,7 +24,7 @@ def run():
         st.image(
             str(fig_path),
             caption="FIGURE 3.36 — Hubble smoothing & thresholding",
-            use_container_width=True,
+            width="stretch",
         )
     else:
         st.warning("Letakkan smoothing_linear_filter_cont_figure.png di assets/")
@@ -75,10 +75,10 @@ def run():
     # --- tampil 1 layar 3 kolom ---
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.image(img, caption="(a) Original", use_container_width=True)
+        st.image(img, caption="(a) Original", width="stretch")
     with c2:
         st.image(
-            blur, caption=f"(b) Averaging {ksize}×{ksize}", use_container_width=True
+            blur, caption=f"(b) Averaging {ksize}×{ksize}", width="stretch"
         )
     with c3:
-        st.image(binary, caption=f"(c) Threshold={thresh}", use_container_width=True)
+        st.image(binary, caption=f"(c) Threshold={thresh}", width="stretch")

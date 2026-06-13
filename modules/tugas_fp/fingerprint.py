@@ -63,24 +63,24 @@ def run():
     
     with col1:
         st.markdown("**Citra Asli (Grayscale)**")
-        st.image(prep_result["original"], use_container_width=True)
+        st.image(prep_result["original"], width="stretch")
         st.markdown("**Setelah CLAHE**")
-        st.image(prep_result["enhanced"], use_container_width=True)
+        st.image(prep_result["enhanced"], width="stretch")
         
     with col2:
         st.markdown("**Binarization (Otsu)**")
-        st.image(prep_result["binary"], use_container_width=True)
+        st.image(prep_result["binary"], width="stretch")
         st.markdown("**Noise Removal (Morphology)**")
-        st.image(prep_result["cleaned"], use_container_width=True)
+        st.image(prep_result["cleaned"], width="stretch")
 
     st.markdown("---")
     col3, col4 = st.columns(2)
     with col3:
         st.markdown("**Skeleton (Thinning)**")
-        st.image(skeleton, use_container_width=True)
+        st.image(skeleton, width="stretch")
     with col4:
         st.markdown("**Deteksi Minutiae**")
-        st.image(vis_img_rgb, use_container_width=True)
+        st.image(vis_img_rgb, width="stretch")
         
     st.success(
         f"✅ Ditemukan: **{len(minutiae['ridge_endings'][0])} Ridge Ending** (🔴) "

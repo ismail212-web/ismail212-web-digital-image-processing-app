@@ -258,7 +258,7 @@ def show_image_centered(image, caption: str = "", width: int = None):
     if width:
         st.image(image, width=width, caption=caption)
     else:
-        st.image(image, caption=caption, use_container_width=True)
+        st.image(image, caption=caption, width="stretch")
 
 
 # ==========================================================
@@ -347,7 +347,7 @@ def main():
             if os.path.exists(LOGO_FILE):
                 _, foto_col, _ = st.columns([1, 2, 1])
                 with foto_col:
-                    st.image(LOGO_FILE, use_container_width=True)
+                    st.image(LOGO_FILE, width="stretch")
 
         st.markdown("<br>", unsafe_allow_html=True)
 
@@ -377,7 +377,7 @@ def main():
         st.markdown("---")
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("⬅ Exit Quiz & Return", use_container_width=True):
+            if st.button("⬅ Exit Quiz & Return", width="stretch"):
                 st.session_state.mode_kuis = False
                 st.rerun()
         return
@@ -391,7 +391,7 @@ def main():
         if os.path.exists(COVER_FILE):
             _, img_col, _ = st.columns([2, 6, 2])
             with img_col:
-                st.image(COVER_FILE, use_container_width=True)
+                st.image(COVER_FILE, width="stretch")
         else:
             st.warning(f"File cover tidak ditemukan: {COVER_FILE}")
 
@@ -410,7 +410,7 @@ def main():
         _, _, col_btn, _, _ = st.columns([1, 1, 2, 1, 1])
         with col_btn:
             if st.button(
-                "🚀 Buka Aplikasi", use_container_width=True, key="btn_buka_app"
+                "🚀 Buka Aplikasi", width="stretch", key="btn_buka_app"
             ):
                 st.session_state.aplikasi_terbuka = True
                 st.rerun()
@@ -471,7 +471,7 @@ def main():
 
             label = f"{ikon} {materi}"
             if terbuka:
-                if st.button(label, key=f"materi_{i}", use_container_width=True):
+                if st.button(label, key=f"materi_{i}", width="stretch"):
                     st.session_state.pilihan_materi = materi
                     st.session_state.pilihan_sub = "Belum Dipilih"
                     st.session_state.menu_aktif = (
@@ -500,7 +500,7 @@ def main():
                 else:
                     ikon = "📄"
                 if st.button(
-                    f"{ikon} {sub}", key=f"sub_{idx}", use_container_width=True
+                    f"{ikon} {sub}", key=f"sub_{idx}", width="stretch"
                 ):
                     st.session_state.pilihan_sub = sub
                     st.session_state.menu_aktif = (
@@ -515,7 +515,7 @@ def main():
         kuis_akhir_bisa = BYPASS_SEMUA or KUIS_AKHIR_TERBUKA or semua_selesai
         st.markdown("#### 🎯 Evaluasi")
         if kuis_akhir_bisa:
-            if st.button("📝 Kuis Akhir", use_container_width=True, type="primary"):
+            if st.button("📝 Kuis Akhir", width="stretch", type="primary"):
                 st.session_state.mode_kuis = True
                 st.rerun()
         else:
@@ -525,7 +525,7 @@ def main():
             )
 
         st.markdown("---")
-        if st.button("🏠 Kembali ke Cover", use_container_width=True):
+        if st.button("🏠 Kembali ke Cover", width="stretch"):
             st.session_state.aplikasi_terbuka = False
             st.session_state.menu_aktif = "Normal"
             st.rerun()
@@ -613,7 +613,7 @@ def main():
         if passed:
             st.success("✅ Kuis modul sudah lulus.")
         else:
-            if st.button(f"📝 Kerjakan Kuis {materi_key}", use_container_width=True):
+            if st.button(f"📝 Kerjakan Kuis {materi_key}", width="stretch"):
                 run_kuis_modul(materi_key)
 
     # ======================================================

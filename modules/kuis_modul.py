@@ -139,7 +139,7 @@ def run_kuis_modul(materi: str) -> bool:
         # Tombol "Sebelumnya" hanya muncul jika bukan soal pertama
         if state["current_question"] > 0:
             if st.button(
-                "◀ Sebelumnya", use_container_width=True, key=f"prev_{key_radio}"
+                "◀ Sebelumnya", width="stretch", key=f"prev_{key_radio}"
             ):
                 # Simpan jawaban sebelum pindah
                 if pil is not None:
@@ -153,7 +153,7 @@ def run_kuis_modul(materi: str) -> bool:
         if pil is not None:  # Hanya aktifkan jika jawaban dipilih
             if state["current_question"] < len(soal_list) - 1:  # Bukan soal terakhir
                 if st.button(
-                    "➡ Berikutnya", use_container_width=True, key=f"next_{key_radio}"
+                    "➡ Berikutnya", width="stretch", key=f"next_{key_radio}"
                 ):
                     # Simpan jawaban untuk soal saat ini
                     state["answers"][q["no"]] = pil
@@ -163,7 +163,7 @@ def run_kuis_modul(materi: str) -> bool:
             else:  # Ini adalah soal terakhir
                 if st.button(
                     "✅ Submit Kuis",
-                    use_container_width=True,
+                    width="stretch",
                     key=f"submit_{key_radio}",
                 ):
                     # Simpan jawaban soal terakhir
@@ -190,7 +190,7 @@ def run_kuis_modul(materi: str) -> bool:
             st.button(
                 "➡ Berikutnya / Submit",
                 disabled=True,
-                use_container_width=True,
+                width="stretch",
                 key=f"disabled_next_{key_radio}",
             )
 

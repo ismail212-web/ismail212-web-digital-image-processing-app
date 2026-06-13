@@ -94,9 +94,9 @@ def run():
     m4.metric("Overripe", f"{a['po']:.1f}%")
 
     v1, v2, v3 = st.columns(3)
-    v1.image(a["orig"], caption="Original", use_container_width=True)
-    v2.image(a["seg"], caption="Segmentasi", use_container_width=True)
-    v3.image(a["ripe"], caption="Area Matang", use_container_width=True)
+    v1.image(a["orig"], caption="Original", width="stretch")
+    v2.image(a["seg"], caption="Segmentasi", width="stretch")
+    v3.image(a["ripe"], caption="Area Matang", width="stretch")
 
     # ===== LAPORAN LENGKAP =====
     st.markdown("---")
@@ -189,7 +189,7 @@ Pemeriksaan dilakukan menggunakan metode fraksinasi standar kelapa sawit gabunga
             ],
         }
     )
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
 
     # V. KESIMPULAN
     st.markdown("### V. KESIMPULAN DAN REKOMENDASI")

@@ -218,7 +218,7 @@ def run():
 
             st.image(
                 str(asset["soal3"]),
-                use_container_width=True,
+                width="stretch",
             )
 
     elif pilihan_eksperimen == "4. Highpass Filters":
@@ -227,7 +227,7 @@ def run():
 
             st.image(
                 str(asset["soal4"]),
-                use_container_width=True,
+                width="stretch",
             )
 
     else:
@@ -236,7 +236,7 @@ def run():
 
             st.image(
                 str(asset["soal5"]),
-                use_container_width=True,
+                width="stretch",
             )
 
     st.markdown("---")
@@ -295,7 +295,7 @@ def run():
     st.image(
         img_gray,
         caption="Input Image",
-        use_container_width=True,
+        width="stretch",
     )
 
     st.info(f"""
@@ -379,28 +379,28 @@ Std : {np.std(img_gray):.2f}
             st.image(
                 img_gray,
                 caption="Original",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c2:
             st.image(
                 res_ilp,
                 caption="Ideal LPF",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c3:
             st.image(
                 res_blp,
                 caption=f"Butterworth LPF (n={order})",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c4:
             st.image(
                 res_glp,
                 caption="Gaussian LPF",
-                use_container_width=True,
+                width="stretch",
             )
 
         st.markdown("### 📈 Evaluasi Lowpass")
@@ -516,28 +516,28 @@ Std : {np.std(img_gray):.2f}
             st.image(
                 img_gray,
                 caption="Original",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c2:
             st.image(
                 res_ihp,
                 caption="Ideal HPF",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c3:
             st.image(
                 res_bhp,
                 caption=f"Butterworth HPF (n={order})",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c4:
             st.image(
                 res_ghp,
                 caption="Gaussian HPF",
-                use_container_width=True,
+                width="stretch",
             )
 
         st.markdown("### 📈 Evaluasi Highpass")
@@ -599,7 +599,7 @@ Std : {np.std(img_gray):.2f}
             st.image(
                 img_gray,
                 caption="Original",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c2:
@@ -607,7 +607,7 @@ Std : {np.std(img_gray):.2f}
             st.image(
                 out_lp,
                 caption=f"Gaussian LPF (D0={cutoff})",
-                use_container_width=True,
+                width="stretch",
             )
 
         with c3:
@@ -615,7 +615,7 @@ Std : {np.std(img_gray):.2f}
             st.image(
                 out_hp,
                 caption=f"Gaussian HPF (D0={cutoff})",
-                use_container_width=True,
+                width="stretch",
             )
 
         st.markdown("### 📈 Perbandingan Kualitas")

@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def show_image_centered(img, caption=""):
-    st.image(img, caption=caption, use_container_width=True)
+    st.image(img, caption=caption, width="stretch")
 
 
 def run():
@@ -29,7 +29,7 @@ def run():
         st.image(
             str(fig_path),
             caption="FIGURE 3.35 — Smoothing Linear Filter",
-            use_container_width=True,
+            width="stretch",
         )
     else:
         st.warning(

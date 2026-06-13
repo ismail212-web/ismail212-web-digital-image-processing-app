@@ -40,7 +40,7 @@ def run():
         st.image(
             "assets/contoh_tower_levels.png",
             caption="256 → 128 → 64 → 32 → 16 → 8 → 4 → 2 level",
-            use_container_width=True,
+            width="stretch",
         )
 
     with c2:
@@ -56,4 +56,4 @@ def run():
                 q_vis = cv2.resize(q, (180, 180), interpolation=cv2.INTER_NEAREST)
                 col = top[i] if i < 4 else bot[i - 4]
                 with col:
-                    st.image(q_vis, caption=f"{lvl} level", use_container_width=True)
+                    st.image(q_vis, caption=f"{lvl} level", width="stretch")

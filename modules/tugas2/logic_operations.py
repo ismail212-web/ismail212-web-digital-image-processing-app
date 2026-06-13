@@ -11,7 +11,7 @@ def run():
     tab1, tab2 = st.tabs(["📘 Gambar Buku", "🧪 Praktikum"])
 
     with tab1:
-        st.image("assets/logic_operations_capitol.png", use_container_width=True)
+        st.image("assets/logic_operations_capitol.png", width="stretch")
 
     with tab2:
         up = st.file_uploader(
@@ -89,18 +89,18 @@ def run():
 
         c1, c2, c3 = st.columns(3)
         with c1:
-            st.image(img, use_container_width=True)
+            st.image(img, width="stretch")
             st.markdown(
                 "<p style='text-align:center'>Original<br>image</p>",
                 unsafe_allow_html=True,
             )
         with c2:
-            st.image(mask, use_container_width=True)
+            st.image(mask, width="stretch")
             st.markdown(
                 f"<p style='text-align:center'>{cap_m}</p>", unsafe_allow_html=True
             )
         with c3:
-            st.image(result, use_container_width=True)
+            st.image(result, width="stretch")
             st.markdown(
                 f"<p style='text-align:center'>{cap_r}</p>", unsafe_allow_html=True
             )

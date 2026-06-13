@@ -32,7 +32,7 @@ def run():
         c1, c2 = st.columns(2)
         with c1:
             st.markdown("**📘 Contoh Buku**")
-            st.image("assets/contoh_tower_4.png", use_container_width=True)
+            st.image("assets/contoh_tower_4.png", width="stretch")
         with c2:
             st.markdown("**💻 Hasil Anda**")
             if img is None:
@@ -44,14 +44,14 @@ def run():
                     small = cv2.resize(img, (sz, sz), cv2.INTER_NEAREST)
                     vis = cv2.resize(small, (220, 220), cv2.INTER_NEAREST)
                     with col:
-                        st.image(vis, caption=f"{sz}x{sz}", use_container_width=True)
+                        st.image(vis, caption=f"{sz}x{sz}", width="stretch")
 
     # ===== VERSI 2 =====
     elif versi.startswith("Versi 2"):
         c1, c2 = st.columns([1.1, 1.4])
         with c1:
             st.markdown("**📘 Contoh Buku**")
-            st.image("assets/contoh_rose_cascade.png", use_container_width=True)
+            st.image("assets/contoh_rose_cascade.png", width="stretch")
         with c2:
             st.markdown("**💻 Hasil Anda**")
             if img is None:
@@ -75,7 +75,7 @@ def run():
         c1, c2 = st.columns(2)
         with c1:
             st.markdown("**📘 Contoh Buku**")
-            st.image("assets/contoh_rose_6grid.png", use_container_width=True)
+            st.image("assets/contoh_rose_6grid.png", width="stretch")
         with c2:
             st.markdown("**💻 Hasil Anda**")
             if img is None:
@@ -89,4 +89,4 @@ def run():
                     vis = cv2.resize(small, (160, 160), cv2.INTER_NEAREST)
                     col = top[i] if i < 3 else bot[i - 3]
                     with col:
-                        st.image(vis, caption=str(sz), use_container_width=True)
+                        st.image(vis, caption=str(sz), width="stretch")

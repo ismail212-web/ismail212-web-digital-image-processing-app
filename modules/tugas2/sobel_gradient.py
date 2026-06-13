@@ -36,14 +36,14 @@ def run():
             st.image(
                 str(kernel_path),
                 caption="Sobel operators untuk ∂P/∂x dan ∂P/∂y",
-                use_container_width=True,
+                width="stretch",
             )
     with col_b:
         if gradient_path.exists():
             st.image(
                 str(gradient_path),
                 caption="Hasil: P, ∂y, ∂x, |∇P|",
-                use_container_width=True,
+                width="stretch",
             )
 
     with st.expander("📖 Penjelasan"):

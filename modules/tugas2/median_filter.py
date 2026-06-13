@@ -38,7 +38,7 @@ def run():
         st.image(
             str(fig_path),
             caption="FIGURE 3.37 — Median vs Averaging untuk salt-and-pepper",
-            use_container_width=True,
+            width="stretch",
         )
     else:
         st.warning("Simpan order_statistic_median_figure.png di assets/")
@@ -95,15 +95,15 @@ def run():
     c1, c2, c3 = st.columns(3)
     with c1:
         st.image(
-            noisy, caption=f"(a) + noise {noise*100:.0f}%", use_container_width=True
+            noisy, caption=f"(a) + noise {noise*100:.0f}%", width="stretch"
         )
     with c2:
         st.image(
-            blur, caption=f"(b) Averaging {ksize}×{ksize}", use_container_width=True
+            blur, caption=f"(b) Averaging {ksize}×{ksize}", width="stretch"
         )
     with c3:
         st.image(
-            median, caption=f"(c) Median {ksize}×{ksize}", use_container_width=True
+            median, caption=f"(c) Median {ksize}×{ksize}", width="stretch"
         )
 
     st.success("💡 Perhatikan: median bersihkan bintik tanpa blur tepi!")

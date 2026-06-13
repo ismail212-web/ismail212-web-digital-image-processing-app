@@ -30,12 +30,12 @@ def run():
         st.image(
             "assets/contoh_gamma_mri.jpg",
             caption="Figure 3.8 — MRI spine: γ = 0.6, 0.4, 0.3",
-            use_container_width=True,
+            width="stretch",
         )
         st.image(
             "assets/contoh_gamma_aerial.jpg",
             caption="Figure 3.9 — Aerial: γ = 3.0, 4.0, 5.0",
-            use_container_width=True,
+            width="stretch",
         )
 
     with c2:
