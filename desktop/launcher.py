@@ -32,9 +32,13 @@ class StreamlitLauncher:
         """Jalankan Streamlit sebagai function call (untuk PyInstaller)."""
         try:
             import streamlit.web.cli as stcli
+            # PENTING: Matikan developmentMode agar --server.port berfungsi
             sys.argv = ["streamlit", "run", self.app_path,
-                       "--server.headless", "true", "--server.port", str(self.port),
-                       "--server.address", self.host, "--browser.gatherUsageStats", "false"]
+                       "--server.headless", "true",
+                       "--server.port", str(self.port),
+                       "--server.address", self.host,
+                       "--browser.gatherUsageStats", "false",
+                       "--global.developmentMode=false"]
             stcli.main()
         except Exception as e:
             print(f"❌ Error menjalankan Streamlit: {e}")
@@ -59,5 +63,4 @@ class StreamlitLauncher:
             print("✅ Server Streamlit dihentikan.")
         elif self.server_thread:
             print("🛑 Menghentikan server Streamlit (thread mode)...")
-            # Thread akan berhenti otomatis saat aplikasi ditutup
             print("✅ Server Streamlit dihentikan.")
