@@ -27,16 +27,17 @@ def load_config():
             "features": {"enable_devtools": False}
         }
 
-def main():
+def main(port=None):
     logger = setup_logger()
     logger.info("Aplikasi Desktop DIP Lab dimulai.")
     config = load_config()
     win_cfg = config.get("window", {})
     st_cfg = config.get("streamlit", {})
     path_cfg = config.get("paths", {})
+    actual_port = port if port is not None else st_cfg.get("port", 8501)
 
     launcher = StreamlitLauncher(
-        port=st_cfg.get("port", 8501),
+        port=actual_port,
         host=st_cfg.get("host", "localhost"),
         app_path=path_cfg.get("streamlit_app", "app/streamlit_app.py")
     )
