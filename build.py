@@ -32,7 +32,7 @@ def build_app():
     # Module yang TIDAK dibutuhkan (exclude untuk mempercepat build)
     excludes = [
         "tensorflow", "torch", "keras", "theano",
-        "scipy", "pandas", "seaborn", "plotly",
+        "scipy", "seaborn", "plotly",
         "sklearn", "scikit-learn", "xgboost", "lightgbm",
         "notebook", "jupyter", "ipython", "IPython",
         "sphinx", "pytest", "setuptools", "pip",
