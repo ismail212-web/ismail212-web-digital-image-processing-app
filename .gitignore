@@ -9,3 +9,7 @@ dist/
 *.egg-info/
 venv/
 env/
+
+# Environment variables (private)
+.env
+logs/*.log

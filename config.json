@@ -1,0 +1,28 @@
+{
+  "app_name": "Digital Image Processing Lab",
+  "version": "1.0.0",
+  "author": "Ismail Pamudji",
+  "window": {
+    "title": "DIP Lab - Universitas Nusa Mandiri",
+    "width": 1280,
+    "height": 800,
+    "resizable": true,
+    "fullscreen": false
+  },
+  "streamlit": {
+    "port": 8501,
+    "host": "localhost",
+    "headless": true
+  },
+  "features": {
+    "auto_update": false,
+    "show_splash": true,
+    "enable_devtools": false
+  },
+  "paths": {
+    "streamlit_app": "app/streamlit_app.py",
+    "assets_dir": "assets",
+    "data_dir": "data",
+    "logs_dir": "logs"
+  }
+}
